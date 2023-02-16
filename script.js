@@ -12,15 +12,7 @@ let messageElement;
 
 // lista de palavras
 
-// let words = [];
-
-// fetch('https://api.dicionario-aberto.net/words')
-//     .then(response => response.json())
-//     .then(data => {
-//         const portugueseWords = data.map(word => word.word);
-//         words.push(...portugueseWords);
-//     })
-//     .catch(error => console.error(error));
+var words = ["banana", "computador", "elefante", "girafa", "javascript", "praia", "sol"];
 
 // inicializar o jogo
 function init() {
@@ -37,9 +29,8 @@ function init() {
     resetButton.addEventListener("click", resetGame);
 
     // escolher uma palavra aleatória
-    secretWord = fetch('https://api.dicionario-aberto.net/words/random')
-    .then(response => response.json())
-    .then(data => data.word);
+    secretWord = words[Math.floor(Math.random() * words.length)];
+
     // inicializar o array de letras adivinhadas
     guessedLetters = [];
 
@@ -107,7 +98,7 @@ function makeGuess() {
         displayGuessesRemaining();
         messageElement.textContent = "Você errou.";
         if (guessesRemaining === 0) {
-            messageElement.textContent = "Você perdeu.A palavra era" + secretWord + ".";
+            messageElement.textContent = "Você perdeu.A palavra era " + secretWord + ".";
             guessButton.disabled = true;
         }
     }
@@ -116,7 +107,7 @@ function makeGuess() {
 // reiniciar o jogo
 function resetGame() {
     // escolher uma palavra aleatória
-    secretWord = fetch('https://api.dicionario-aberto.net/words/random');
+    secretWord = words[Math.floor(Math.random() * words.length)];
 
     // inicializar o array de letras adivinhadas
     guessedLetters = [];
